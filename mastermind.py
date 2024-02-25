@@ -112,7 +112,7 @@ while playagain:
 		guess += 1
 
 		# Players choice must be 4 coloured pegs.
-		choice: str = playerinput()
+		choice = playerinput()
 		for i in range(4):
 			yourchoice.append(get_colour(choice[i]))
 
@@ -134,9 +134,9 @@ while playagain:
 	print(f"The hidden code was {mychoice[0]}, {mychoice[1]}, {mychoice[2]}, {mychoice[3]}")
 
 	# End detail
-	playagain = input("\nPlay again? \nY for Yes or \nQ to Quit \n\n")
+	again = input("\nPlay again? \nY for Yes or \nQ to Quit \n\n")
 
-	if playagain.lower() == "y":
+	if again.lower() == "y":
 		os.system('cls||clear')
 		continue
 	else:
