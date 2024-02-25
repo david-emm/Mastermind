@@ -47,7 +47,7 @@ print("  🟤 - Brown. A colour is not in the answer.")
 print("These help pegs do not indicate the position of the guess pegs.\n")
 print("Enter 4 colours - back space may be used to correct entry.")
 
-playagain = True
+playagain: bool = True
 while playagain:
 	
 	mychoice: list[str] = []
