@@ -1,4 +1,4 @@
-#!/usr/bin/env python3hints
+#!/usr/bin/env python
 
 """
 This is a text based version of MasterMind written in Python 3.
