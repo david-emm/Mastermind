@@ -1,4 +1,4 @@
-#!/usr/bin/env python3hints
+#!/usr/bin/env python
 
 """
 This is a text based version of MasterMind written in Python 3.
@@ -31,11 +31,12 @@ import random
 
 
 # A dictionary for the colours.
-colours: list[str] = {"r": "🔴", "o": "🟠", "g": "🟢", "b": "🔵", "p": 
-			"🟣", "y": "🟡", "1": "⚫", "2": "⚪", "3": "🟤" }
+colours: dict[str, str] = {"r": "🔴", "o": "🟠", "g": "🟢", "b": "🔵", "p": 
+			"🟣", "y": "🟡", "k": "⚫", "w": "⚪", "n": "🟤" }
 
 # Change size of terminal and clear it.
 sys.stdout.write(f"\x1b[8;{40};{100}t")
+
 # Text to tell you what's what.
 print("\nThis is a text based version of MasterMind written in Python 3.")
 print("Emojis are used instead of coloured pegs.")
@@ -46,7 +47,7 @@ print("  🟤 - Brown. A colour is not in the answer.")
 print("These help pegs do not indicate the position of the guess pegs.\n")
 print("Enter 4 colours - back space may be used to correct entry.")
 
-playagain = True
+playagain: bool = True
 while playagain:
 	
 	mychoice: list[str] = []
@@ -68,9 +69,8 @@ while playagain:
 			for i in range(4):
 				if choice[i] not in ("rogbpy") or choice == '':
 					print("You must only enter r, o, g, b, p or y")
-			else:
-				
-				return choice 
+				else:
+					return choice 
 				
 	def answer(hidden: list[str], guess: list[str]) -> list[str]:
 		myanswer: list[str]= []
@@ -81,36 +81,38 @@ while playagain:
 		choice: str
 		
 		for i in range(4):
+			if a[i] == b[i]:
+				marka[i] = True
+				markb[i] = True 
+				choice = "k"
+				myanswer.append(get_colour(choice))
+			
+		for i in range(4):
 			for j in range(4):
-				if a[i] == b[j] and (marka[i] == True or markb[j] == True):
+				if a[i] != b[j]:
 					continue
-				elif a[i] == b[j] and i == j:
+				elif a[i] == b[j] and marka[i] == False and markb[j] == False:
 					marka[i] = True
 					markb[j] = True 
-					choice = "1"
-					myanswer.append(get_colour(choice))
-				elif a[i] == b[j]:
-					marka[i] = True
-					markb[j] = True 
-					choice = "2"
+					choice = "w"
 					myanswer.append(get_colour(choice))
 
 		while len(myanswer) < 4:
-			myanswer.append(get_colour("3"))
+			myanswer.append(get_colour("n"))
 		return myanswer
 				
 	# Computer choice - hidden until guessed correctly or game ended.
 	for i in range(4):
-		choice: list[str] = random.choice("rogbpy")
-		mychoice.append(get_colour(choice))
-	# ~ mychoice = ["🔴", "🟠", "🔴", "🟡"]
+		choice: str = random.choice("rogbpy")
+		mychoice.append(get_colour(choice)) 
+	# mychoice = ['🟠', '🟠', '🟡', '🟣']
 	
 	# Play until you win or make 8 wrong guesses.
 	while guess < 8:
 		guess += 1
 
 		# Players choice must be 4 coloured pegs.
-		choice:list[str] = playerinput()
+		choice = playerinput()
 		for i in range(4):
 			yourchoice.append(get_colour(choice[i]))
 
@@ -118,8 +120,8 @@ while playagain:
 		myprompt = answer(mychoice, yourchoice)
 
 		# Printing guesses and prompts and the next guess   
-		print(f"\nThis is your quess {guess}")
-		print(f"Your choice is {yourchoice[0]}, {yourchoice[1]}, {yourchoice[2]}, {yourchoice[3]}, | My prompt is {myprompt[0]}, {myprompt[1]}, {myprompt[2]}, {myprompt[3]}\n")
+		# ~ print(f"\nThis is your quess {guess}")
+		print(f"Guess {guess}: Your choice: {yourchoice[0]}, {yourchoice[1]}, {yourchoice[2]}, {yourchoice[3]}, | My prompt is {myprompt[0]}, {myprompt[1]}, {myprompt[2]}, {myprompt[3]}\n")
 		
 		# Check for win
 		if myprompt == ["⚫", "⚫", "⚫", "⚫"]:
@@ -132,9 +134,9 @@ while playagain:
 	print(f"The hidden code was {mychoice[0]}, {mychoice[1]}, {mychoice[2]}, {mychoice[3]}")
 
 	# End detail
-	playagain: str = input("\nPlay again? \nY for Yes or \nQ to Quit \n\n")
+	again = input("\nPlay again? \nY for Yes or \nQ to Quit \n\n")
 
-	if playagain.lower() == "y":
+	if again.lower() == "y":
 		os.system('cls||clear')
 		continue
 	else:
