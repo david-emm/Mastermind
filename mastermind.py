@@ -35,7 +35,7 @@ colours: dict[str, str] = {"r": "🔴", "o": "🟠", "g": "🟢", "b": "🔵", "
 			"🟣", "y": "🟡", "k": "⚫", "w": "⚪", "n": "🟤" }
 
 # Change size of terminal and clear it.
-sys.stdout.write(f"\x1b[8;{40};{100}t")
+sys.stdout.write(f"\x1b[8;{38};{88}t")
 
 # Text to tell you what's what.
 print("\nThis is a text based version of MasterMind written in Python 3.")
@@ -43,7 +43,7 @@ print("Emojis are used instead of coloured pegs.")
 print("After your guess the program will help you with the following hints")
 print("  ⚫ - Black. A colour that is present and is correctly placed. ")
 print("  ⚪ - White. A colour that is present but in the wrong place.")
-print("  🟤 - Brown. A colour that is not in your guess.")
+print("  🟤 - Brown. No hints.")
 print("These help pegs do not indicate the position of the guess pegs.\n")
 print("Enter 4 colours - back space may be used to correct entry.")
 
@@ -67,7 +67,7 @@ while playagain:
 				print("Enter 4 and only 4 colours.")
 			else:
 				if len(choice) == 4:
-					contained: str = [x for x in choice if x in "rogbpy"]	
+					contained: list[str] = [x for x in choice if x in "rogbpy"]	
 					if len(contained) == 4:
 						return choice
 					else:
