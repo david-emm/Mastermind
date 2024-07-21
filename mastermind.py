@@ -2,7 +2,7 @@
 
 """
 This is a text based version of MasterMind written in Python 3.
-Emojis are used to represent coloured pegs.
+Emojis are used to represent the coloured pegs.
 A overview of the code:
 Colours Dictionary: Maps colour codes to corresponding emojis.
 Terminal Setup: Changes the size of the terminal and clears it.
@@ -47,6 +47,7 @@ print("  🟤 - Brown. No hints.")
 print("These help pegs do not indicate the position of the guess pegs.\n")
 print("Enter 4 colours - back space may be used to correct entry.")
 
+# Setting up the game
 playagain: bool = True
 while playagain:
 	
@@ -62,7 +63,7 @@ while playagain:
 	def playerinput() -> str:
 		while True:
 			choice: str = ""
-			choice = input("Enter: r for 🔴, o for 🟠, g for 🟢, b for 🔵, p for 🟣, y for 🟡: " )
+			choice = input("Enter: r for 🔴, o for 🟠, g for 🟢, b for 🔵, p for 🟣, y for 🟡: ")
 			if len(choice) != 4:
 				print("Enter 4 and only 4 colours.")
 			else:
@@ -106,10 +107,10 @@ while playagain:
 	for i in range(4):
 		choice: str = random.choice("rogbpy")
 		mychoice.append(get_colour(choice)) 
-	# mychoice = ['🟠', '🟠', '🟡', '🟣']
+	# mychoice = ['🟠', '🟠', '🟡', '🟣'] only used for testing
 	
-	# Play until you win or make 8 wrong guesses.
-	while guess < 8:
+	# the main play
+	while guess < 8:  # Play until you win or make 8 wrong guesses.
 		guess += 1
 
 		# Players choice must be 4 coloured pegs.
