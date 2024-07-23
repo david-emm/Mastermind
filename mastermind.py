@@ -45,16 +45,16 @@ print("After your guess the program will help you with the following hints")
 print("  ⚫ - Black. A colour that is present and is correctly placed. ")
 print("  ⚪ - White. A colour that is present but in the wrong place.")
 print("  🟤 - Brown. No hints.")
-print("These help pegs do not indicate the position of the guess pegs.\n")
+print("These help pegs do not align with the position of the guess pegs.\n")
 print("Enter 4 colours - back space may be used to correct entry.")
 
 playagain: bool = True
 while playagain:
 
-    mychoice: list[str] = []
-    yourchoice: list[str] = []
-    myprompt: list[str] = []
-    guess: int = 0
+    c: list[str] = []  # computer's choice
+    p: list[str] = []  # players's choice
+    hp: list[str] = []  # computer's prompt or help pegs
+    n: int = 0  # number of guessed made by player
     get: str = "Enter: r for 🔴, o for 🟠, g for 🟢, b for 🔵, p for 🟣, y for 🟡: "
 
     def get_colour(c: str) -> str:
@@ -107,34 +107,35 @@ while playagain:
     # Computer choice - hidden until guessed correctly or game ended
     for i in range(4):
         choice: str = random.choice("rogbpy")
-        mychoice.append(get_colour(choice))
-    # mychoice = ['🟠', '🟠', '🟡', '🟣']
+        c.append(get_colour(choice))
+    # mychoice = ['🟠', '🟠', '🟡', '🟣'
 
     # Play until you win or make 8 wrong guesses
-    while guess < 8:
-        guess += 1
+    while n < 8:
+        n += 1
 
         # Players choice must be 4 coloured pegs
         choice = playerinput()
         for i in range(4):
-            yourchoice.append(get_colour(choice[i]))
+            p.append(get_colour(choice[i]))
 
         # Computer's prompt to help player to make better guess
-        myprompt = answer(mychoice, yourchoice)
-        random.shuffle(myprompt)
+        hp = answer(c, p)
+        random.shuffle(hp)
 
         # Printing guesses and prompts and the next guess
-        print(f"Guess {guess}: Your choice: {yourchoice[0]}, {yourchoice[1]}, {yourchoice[2]}, {yourchoice[3]}, | My prompt is {myprompt[0]}, {myprompt[1]}, {myprompt[2]}, {myprompt[3]}\n")
+        print(f"Guess {n}: Your guess: {p[0]}, {p[1]}, {p[2]}, {p[3]}", end='')
+        print(f" | My prompt is {hp[0]}, {hp[1]}, {hp[2]}, {hp[3]}\n")
 
         # Check for win
-        if myprompt == ["⚫", "⚫", "⚫", "⚫"]:
+        if hp == ["⚫", "⚫", "⚫", "⚫"]:
             print("Congratulations! Your a winner!")
             break
 
         # Clear yourchoice memory for  next go
-        yourchoice = []
+        p = []
 
-    print(f"The hidden code was {mychoice[0]}, {mychoice[1]}, {mychoice[2]}, {mychoice[3]}")
+    print(f"The hidden code was {c[0]}, {c[1]}, {c[2]}, {c[3]}")
 
     # End detail
     again = input("\nPlay again? \nY for Yes or \nQ to Quit \n\n")

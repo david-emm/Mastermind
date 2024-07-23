@@ -33,7 +33,7 @@ import random
 
 # A dictionary for the colours
 colours: dict[str, str] = {"r": "🔴", "o": "🟠", "g": "🟢", "b": "🔵", "p":
-            "🟣", "y": "🟡", "k": "⚫", "w": "⚪", "n": "🟤"}
+                           "🟣", "y": "🟡", "k": "⚫", "w": "⚪", "n": "🟤"}
 
 # Change size of terminal and clear it
 sys.stdout.write(f"\x1b[8;{38};{88}t")
@@ -55,6 +55,7 @@ while playagain:
     yourchoice: list[str] = []
     myprompt: list[str] = []
     guess: int = 0
+    get: str = "Enter: r for 🔴, o for 🟠, g for 🟢, b for 🔵, p for 🟣, y for 🟡: "
 
     def get_colour(c: str) -> str:
         colour: str = colours[c]
@@ -63,7 +64,7 @@ while playagain:
     def playerinput() -> str:
         while True:
             choice: str = ""
-            choice = input("Enter: r for 🔴, o for 🟠, g for 🟢, b for 🔵, p for 🟣, y for 🟡: ")
+            choice = input(str(get))
             if len(choice) != 4:
                 print("Enter 4 and only 4 colours.")
             else:
