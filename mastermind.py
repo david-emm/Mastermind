@@ -1,21 +1,21 @@
 #!/usr/bin/env python3hints
 
 """
-This is a text based version of MasterMind written in Python 3 written
-to run in a terminal. (python mastermind.py or python3 mastermind.py)
-Emojis are used to represent coloured pegs.
+This is a text based version of MasterMind written in Python 3 to run
+in a terminal. (python mastermind.py or python3 mastermind.py)
+Emoticons 🔴 🟠 🟢 🔵 🟣 🟡 ⚫ ⚪ 🟤 are used to represent the pegs.
+
 A overview of the code:
-Colours Dictionary: Maps colour codes to corresponding emojis.
-Terminal Setup: Changes the size of the terminal and clears it.
+Colours Dictionary: Maps colour codes to corresponding emoticon.
+Terminal Setup: Changes the size of the terminal area and clears it.
 Introduction: Provides an introduction to the game and explains
-the meaning of emojis used for hints.
+the meaning of emoticons used for hints.
 Game Loop: The game is played within a while loop. The computer randomly
-generates a hidden code, and the player has up to 8 guesses
-to figure it out.
+generates a hidden code, and the player has up to 8 guesses to figure it out.
 Player Input: Takes input from the player, ensuring that they enter
 exactly 4 valid color codes.
 Answer Function: Compares the player's guess with the hidden code and
-generates hints in the form of emojis.
+generates hints in the form of emoticons.
 Game Progress: Prints the player's current guess, the hints provided
 by the program, and prompts for the next guess.
 Winning Check: Checks if the player has guessed the correct code,
@@ -138,9 +138,9 @@ while playagain:
     print(f"The hidden code was {hc[0]}, {hc[1]}, {hc[2]}, {hc[3]}")
 
     # End detail
-    again = input("\nPlay again? \nY for Yes or \nQ to Quit \n\n")
+    again: str = input("\nPlay again? \nY for Yes or \nQ to Quit \n\n")
 
-    if again.lower() == "y":
+    if again[0].lower() == "y":
         os.system('cls||clear')
         continue
     else:
