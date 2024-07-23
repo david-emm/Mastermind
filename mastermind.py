@@ -1,4 +1,4 @@
-#!/usr/bin/env python3hints
+#!/usr/bin/env python3
 
 """
 This is a text based version of MasterMind written in Python 3 to run
@@ -37,6 +37,7 @@ colours: dict[str, str] = {"r": "🔴", "o": "🟠", "g": "🟢", "b": "🔵", "
 
 # Change size of terminal and clear it
 sys.stdout.write(f"\x1b[8;{38};{88}t")
+os.system('cls||clear')
 
 # Text to tell you what's what
 print("\nThis is a text based version of MasterMind written in Python 3.")
