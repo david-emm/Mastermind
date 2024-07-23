@@ -51,7 +51,7 @@ print("Enter 4 colours - back space may be used to correct entry.")
 playagain: bool = True
 while playagain:
 
-    c: list[str] = []  # computer's choice
+    hc: list[str] = []  # computer's choice or hidden code
     p: list[str] = []  # players's choice
     hp: list[str] = []  # computer's prompt or help pegs
     n: int = 0  # number of guessed made by player
@@ -107,7 +107,7 @@ while playagain:
     # Computer choice - hidden until guessed correctly or game ended
     for i in range(4):
         choice: str = random.choice("rogbpy")
-        c.append(get_colour(choice))
+        hc.append(get_colour(choice))
     # mychoice = ['🟠', '🟠', '🟡', '🟣'
 
     # Play until you win or make 8 wrong guesses
@@ -120,7 +120,7 @@ while playagain:
             p.append(get_colour(choice[i]))
 
         # Computer's prompt to help player to make better guess
-        hp = answer(c, p)
+        hp = answer(hc, p)
         random.shuffle(hp)
 
         # Printing guesses and prompts and the next guess
@@ -135,7 +135,7 @@ while playagain:
         # Clear yourchoice memory for  next go
         p = []
 
-    print(f"The hidden code was {c[0]}, {c[1]}, {c[2]}, {c[3]}")
+    print(f"The hidden code was {hc[0]}, {hc[1]}, {hc[2]}, {hc[3]}")
 
     # End detail
     again = input("\nPlay again? \nY for Yes or \nQ to Quit \n\n")
