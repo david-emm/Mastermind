@@ -2,8 +2,8 @@
 
 """
 This is a text based version of MasterMind written in Python 3 to run
-in a terminal. (python mastermind.py or python3 mastermind.py)
-Emoticons 🔴 🟠 🟢 🔵 🟣 🟡 ⚫ ⚪ 🟤 are used to represent the pegs.
+in a terminal. (python mastermind.py or python3 mastermind.py). These
+emoticons 🔴 🟠 🟢 🔵 🟣 🟡 ⚫ ⚪ 🟤 are used to represent the pegs.
 
 A overview of the code:
 Colours Dictionary: Maps colour codes to corresponding emoticon.
