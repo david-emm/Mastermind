@@ -139,7 +139,7 @@ while playagain:
     print(f"The hidden code was {hc[0]}, {hc[1]}, {hc[2]}, {hc[3]}")
 
     # End detail
-    again: str = input("\nPlay again? \nY for Yes or \nQ to Quit \n\n")
+    again: str = input("\nPlay again? \nY for Yes or \nN to Quit \n\n")
 
     if again[0].lower() == "y":
         os.system('cls||clear')
