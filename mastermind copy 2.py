@@ -54,7 +54,7 @@ while playagain:
 
     hc: list[str] = []  # the hidden code
     p: list[str] = []  # the players's choice
-    hp: list[str] = []  # the help pegs 0r prompt
+    hp: list[str] = []  # the help pegs or prompt
     n: int = 0  # number of guessed made by the player
     get: str = "Enter: r for 🔴, o for 🟠, g for 🟢, b for 🔵, p for 🟣, y for 🟡: "
 
@@ -88,7 +88,7 @@ while playagain:
             if a[i] == b[i]:
                 marka[i] = True
                 markb[i] = True
-                choice = "k"
+                choice = "k"  # a black peg
                 myanswer.append(get_colour(choice))
 
         for i in range(4):
@@ -98,19 +98,18 @@ while playagain:
                 elif a[i] == b[j] and marka[i] is False and markb[j] is False:
                     marka[i] = True
                     markb[j] = True
-                    choice = "w"
+                    choice = "w"  # a white peg 
                     myanswer.append(get_colour(choice))
 
         while len(myanswer) < 4:
-            myanswer.append(get_colour("n"))
+            myanswer.append(get_colour("n"))  # brown pegs
         return myanswer
 
     # Computer choice - hidden until guessed correctly or game ended
     for i in range(4):
         choice: str = random.choice("rogbpy")
         hc.append(get_colour(choice))
-    # mychoice = ['🟠', '🟠', '🟡', '🟣'
-
+   
     # Play until you win or make 8 wrong guesses
     while n < 8:
         n += 1
@@ -136,6 +135,8 @@ while playagain:
         # Clear yourchoice memory for  next go
         p = []
 
+    # If no win after 8 attempts
+    print("The computer wins")
     print(f"The hidden code was {hc[0]}, {hc[1]}, {hc[2]}, {hc[3]}")
 
     # End detail
