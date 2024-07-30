@@ -98,7 +98,7 @@ while playagain:
                 elif a[i] == b[j] and marka[i] is False and markb[j] is False:
                     marka[i] = True
                     markb[j] = True
-                    choice = "w"  # a white peg 
+                    choice = "w"  # a white peg
                     myanswer.append(get_colour(choice))
 
         while len(myanswer) < 4:
@@ -109,7 +109,7 @@ while playagain:
     for i in range(4):
         choice: str = random.choice("rogbpy")
         hc.append(get_colour(choice))
-   
+
     # Play until you win or make 8 wrong guesses
     while n < 8:
         n += 1
