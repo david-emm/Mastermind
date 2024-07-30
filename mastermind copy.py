@@ -149,6 +149,3 @@ while playagain:
         print("\nThank you for playing!")
         print("Bye! 👋\n")
         playagain = False
-        sys.stdout.write(f"\x1b[8;{24};{80}t")
-        os.system('cls||clear')
-
