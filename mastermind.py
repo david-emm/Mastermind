@@ -135,9 +135,9 @@ while playagain:
         # Clear yourchoice memory for  next go
         p = []
 
-        # If no win after 8 attempts
-        print("The computer wins")
-        print(f"The hidden code was {hc[0]}, {hc[1]}, {hc[2]}, {hc[3]}")
+    # If no win after 8 attempts
+    print("The computer wins")
+    print(f"The hidden code was {hc[0]}, {hc[1]}, {hc[2]}, {hc[3]}")
 
     # End detail
     again: str = input("\nPlay again? \nY for Yes or \nN to Quit \n\n")
@@ -150,4 +150,3 @@ while playagain:
         print("Bye! 👋\n")
         playagain = False
         sys.stdout.write(f"\x1b[8;{24};{80}t")
-        # os.system('cls||clear')
