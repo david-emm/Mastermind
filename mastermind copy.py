@@ -25,9 +25,11 @@ If yes, the game continues; otherwise, it exits.
 Exit: Displays a farewell message and exits the program when the player
 decides not to play again.
 """
+
 import os
 import sys
 import random
+
 
 # A dictionary for the colours
 colours: dict[str, str] = {"r": "🔴", "o": "🟠", "g": "🟢", "b": "🔵", "p":
@@ -122,7 +124,7 @@ while playagain:
         random.shuffle(hp)
 
         # Printing guesses and prompts and the next guess
-        print(f"Guess {n}: Your guess was: {p[0]}, {p[1]}, {p[2]}, {p[3]}", end='')
+        print(f"Guess {n}: Your guess: {p[0]}, {p[1]}, {p[2]}, {p[3]}", end='')
         print(f" | My prompt is {hp[0]}, {hp[1]}, {hp[2]}, {hp[3]}\n")
 
         # Check for win
@@ -138,7 +140,8 @@ while playagain:
     print(f"The hidden code was {hc[0]}, {hc[1]}, {hc[2]}, {hc[3]}")
 
     # End detail
-    again: str = input("\nPlay again? \nY for Yes or \nN to Quit: ")
+    again: str = input("\nPlay again? \nY for Yes or \nN to Quit \n\n")
+
     if again[0].lower() == "y":
         os.system('cls||clear')
         continue
