@@ -50,9 +50,9 @@ print("Enter 4 colours - back space may be used to correct entry.")
 playagain: bool = True
 while playagain:
 
-    hidden_code: list[str] = []  # the hidden code
-    guess: list[str] = []  # the players's choice
-    prompt: list[str] = []  # the help pegs or prompt
+    hc: list[str] = []  # the hidden code
+    p: list[str] = []  # the players's choice
+    hp: list[str] = []  # the help pegs or prompt
     attempt: int = 0  # number of guessed made by the player
     get: str = "Enter: r for 🔴, o for 🟠, g for 🟢, b for 🔵, p for 🟣, y for 🟡: "
 
@@ -106,7 +106,7 @@ while playagain:
     # Computer choice - hidden until guessed correctly or game ended
     for i in range(4):
         choice: str = random.choice("rogbpy")
-        hidden_code.append(get_colour(choice))
+        hc.append(get_colour(choice))
 
     # Play until you win or make 8 wrong guesses
     while attempt < 8:
@@ -115,29 +115,29 @@ while playagain:
         # Players choice must be 4 coloured pegs
         choice = playerinput()
         for i in range(4):
-            guess.append(get_colour(choice[i]))
+            p.append(get_colour(choice[i]))
 
         # Computer's prompt to help player to make better guess
-        prompt = answer(hidden_code, guess)
-        random.shuffle(prompt)
+        hp = answer(hc, p)
+        random.shuffle(hp)
 
         # Printing guesses and prompts and the next guess
-        print(f"Guess {attempt}: Your guess was: {guess[0]}, {guess[1]}, {guess[2]}, {guess[3]}", end='')
-        print(f" | My prompt is {prompt[0]}, {prompt[1]}, {prompt[2]}, {prompt[3]}\n")
+        print(f"Guess {attempt}: Your guess was: {p[0]}, {p[1]}, {p[2]}, {p[3]}", end='')
+        print(f" | My prompt is {hp[0]}, {hp[1]}, {hp[2]}, {hp[3]}\n")
 
         # Check for win
-        if prompt == ["⚫", "⚫", "⚫", "⚫"]:
+        if hp == ["⚫", "⚫", "⚫", "⚫"]:
             print("Congratulations! Your a winner!")
-            print(f"The hidden code was {hidden_code[0]}, {hidden_code[1]}, {hidden_code[2]}, {hidden_code[3]}")
+            print(f"The hidden code was {hc[0]}, {hc[1]}, {hc[2]}, {hc[3]}")
             break
         elif attempt == 8:
             # If no win after 8 attempts
             print("The computer wins")
-            print(f"The hidden code was {hidden_code[0]}, {hidden_code[1]}, {hidden_code[2]}, {hidden_code[3]}")
+            print(f"The hidden code was {hc[0]}, {hc[1]}, {hc[2]}, {hc[3]}")
             break
         
         # Attempts < 8? Clear your choice memory for  next go
-        guess = []
+        p = []
 
  
     # End detail
