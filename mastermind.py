@@ -39,7 +39,7 @@ os.system('cls||clear')
 
 # Text to tell you what's what
 print("\nThis is a text based version of MasterMind written in Python 3.")
-print("Emojis are used instead of coloured pegs.")
+print("These emojis, 🔴 🟠 🟢 🔵 🟣 🟡, are used instead of coloured pegs.")
 print("After your guess the program will help you with the following hints")
 print("  ⚫ - Black. A colour that is present and is correctly placed. ")
 print("  ⚪ - White. A colour that is present but in the wrong place.")
@@ -129,12 +129,12 @@ while playagain:
 
         # Check for win
         if prompt == ["⚫", "⚫", "⚫", "⚫"]:
-            print("Congratulations! Your a winner!")
+            print("Congratulations! You are the winner!")
             print(f"The hidden code was {hidden_code[0]}, {hidden_code[1]}, {hidden_code[2]}, {hidden_code[3]}")
             break
         elif attempt == 8:
             # If no win after 8 attempts
-            print("The computer wins")
+            print(" Hard luck, the computer wins")
             print(f"The hidden code was {hidden_code[0]}, {hidden_code[1]}, {hidden_code[2]}, {hidden_code[3]}")
             break
         
