@@ -146,6 +146,8 @@ while playagain:
     again: str = input("\nPlay again? \nY for Yes or \nN to Quit: ")
     if len(again) == 0:
         again ="y"
+        os.system('cls||clear')
+        continue
     elif again[0].lower() == "y":
         os.system('cls||clear')
         continue
