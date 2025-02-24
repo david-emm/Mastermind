@@ -53,12 +53,14 @@ while playagain:
     guess: list[str] = []  # the players's choice
     prompt: list[str] = []  # the help pegs or prompt
     attempt: int = 0  # number of guessed made by the player
-    get: str = "Enter: r for 🔴, o for 🟠, g for 🟢, b for 🔵, p for 🟣, y for 🟡: "
+    get: str = "Enter: r for 🔴, o for 🟠, g for 🟢, b for 🔵, p for 🟣, y for 🟡: " # Player input string
 
+    # Returns emoji from alpha input
     def get_colour(c: str) -> str:
         colour: str = colours[c]
         return colour
 
+    # Checks player;s input for mistakes
     def playerinput() -> str:
         while True:
             choice: str = ""
@@ -73,6 +75,7 @@ while playagain:
                     else:
                         print("You must only enter r, o, g, b, p or y")
 
+    # Compute computer's answer to player's input
     def answer(hidden: list[str], guess: list[str]) -> list[str]:
         myanswer: list[str] = []
         a: list[str] = hidden
