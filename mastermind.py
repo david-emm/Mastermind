@@ -34,7 +34,7 @@ colours: dict[str, str] = {"r": "🔴", "o": "🟠", "g": "🟢", "b": "🔵", "
                            "🟣", "y": "🟡", "k": "⚫", "w": "⚪", "n": "🟤"}
 
 # Change size of terminal and clear it
-sys.stdout.write(f"\x1b[8;{38};{88}t")
+sys.stdout.write(f"\x1b[8;{38};{80}t")
 os.system('cls||clear')
 
 # Text to tell you what's what
@@ -45,7 +45,6 @@ print("  ⚫ - Black. A colour that is present and is correctly placed. ")
 print("  ⚪ - White. A colour that is present but in the wrong place.")
 print("  🟤 - Brown. No hints.")
 print("These help pegs do not align with the position of the guess pegs.\n")
-print("Enter 4 colours - back space may be used to correct entry.")
 
 playagain: bool = True
 while playagain:
