@@ -16,11 +16,12 @@ def hidden() -> list:
         for i in range(4):
             choice: str = random.choice('rgbyop')
             alpha.append(get_colour(choice))
+            # beta: str = '  '.join(alpha)
         return alpha
 
 # Converts a list (of emojis) into a string
 def make_str(beta: list) -> str:
-    gamma: str = '  '.join(beta)    
+    gamma: str = '  '.join(beta)
     return gamma
 
 # Converts a string into a list
@@ -65,7 +66,7 @@ def preview():
     # Print colored text
     prewin.addstr(1, 2, 'This is a text based version of MasterMind written in Python 3')
     prewin.addstr(2, 2, 'These emojis, 🔴 🟠 🟢 🔵 🟣 🟡, are used instead of coloured pegs')
-    prewin.addstr(3, 2, 'The computer will give you with the following hints')
+    prewin.addstr(3, 2, 'The computer will give you the following hints')
     prewin.addstr(4, 2, '  ⚫ - Black. A colour that is present and is correctly placed ')
     prewin.addstr(5, 2, '  ⚪ - White. A colour that is present but in the wrong place')
     prewin.addstr(6, 2, '  🟤 - Brown. No hints')
@@ -80,16 +81,16 @@ def preview():
         if key == ord('c'):
             prewin.erase()
             prewin.refresh()
-            return        
-# Sets up the 4 windows 
-def game(): 
+            return
+# Sets up the 4 game windows
+def game():
     # Game variables
     h_code: list = hidden()
     l_code: str = make_str(h_code)
     myguess: str = ''
     guess_line: int  = 1
     help_line:int  = 1
-    player_pos:int = 28
+    peg_pos:int = 28
     go_count:int = 0
     peg_count:int = 0
     cover = '⚫  ⚫  ⚫  ⚫'
@@ -100,7 +101,7 @@ def game():
     header.addstr(1, 5, 'Your Guess', curses.color_pair(2))
     header.addstr(1, 27, 'Help', curses.color_pair(2))
     header.refresh()
-    
+
     # Adds the 'Your Guess' window
     guess = curses.newwin(10, 20, 5, 20)
     guess.box()
@@ -111,7 +112,7 @@ def game():
     help.box()
     help.refresh()
 
-# Add the player's window and starts game
+# Add the player's window and starts the game
     player = curses.newwin(5, 69, 15, 6)
     player.box()
     player.addstr(1, 3,'Choose (r) : 🔴, (o) : 🟠, (g) : 🟢, (b) : 🔵, (p): 🟣, (y): 🟡', curses.color_pair(2))
@@ -130,13 +131,13 @@ def game():
             break
         if peg_count < 4:
             if chr(key) in 'rogbpy':
-                emoji = get_colour(chr(key))
-                player.addstr(3, player_pos, emoji)
-                player_pos += 4
+                peg = get_colour(chr(key))
+                player.addstr(3, peg_pos, peg)
+                peg_pos += 4
                 key = ''
                 player.refresh()
                 peg_count += 1
-        if peg_count == 4:    
+        if peg_count == 4:
             player.addstr(3, 44, '(Enter) or rejec(t)', curses.color_pair(1))
             if key == ord('q'):
                 player.addstr(1, 1,'                      Thank you for playing!                       ', curses.color_pair(1))
@@ -147,11 +148,11 @@ def game():
             if key == ord('t'):
                 player.addstr(3, 12,'Your choice is                                         ', curses.color_pair(1))
                 peg_count = 0
-                player_pos = 28
+                peg_pos = 28
                 myguess = ''
                 player.refresh()
                 continue
-            if key == 10: # Use 10 as the Enter key code as curses.KEY_ENTER is unreliable
+            if key == 10: # Use 10 as the Enter key code (curses.KEY_ENTER) is unreliable
                 # Get a substring of length 22 starting from player line (3,28)
                 byte_data = player.instr(3, 28, 22)
                 # Convert bytes to list
@@ -182,7 +183,7 @@ def game():
                        player.addstr(3, 12,'                    Bye! 👋                         ', curses.color_pair(1))
                        player.refresh()
                        curses.napms(1500)
-                       break    
+                       break
                 elif go_count == 8:
                     player.erase()
                     player = curses.newwin(5, 69, 15, 6)
@@ -200,11 +201,11 @@ def game():
                         player.addstr(3, 12,'                    Bye! 👋                         ', curses.color_pair(1))
                         player.refresh()
                         curses.napms(1500)
-                        break    
+                        break
                 else:
                     player.addstr(3, 12,'Your choice is                                     ', curses.color_pair(1))
                     peg_count = 0
-                    player_pos = 28
+                    peg_pos = 28
                     myguess = ''
                     player.refresh()
                     continue
@@ -222,8 +223,8 @@ def main(stdscr):
     curses.curs_set(0)
     # Title
     stdscr.addstr(1, 31, "David's Mastermind", curses.color_pair(3))
-    stdscr.refresh()    
-    # The game routine - first show the game explanation window
+    stdscr.refresh()
+    # First show the game explanation window
     preview()
     # Now play the game until the player wins of runs out of goes
     game()
