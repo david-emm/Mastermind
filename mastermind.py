@@ -230,3 +230,5 @@ def main(stdscr):
     game()
 
 curses.wrapper(main)
+
+
