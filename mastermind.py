@@ -10,7 +10,7 @@ def get_colour(c: str) -> str:
     colour: str = colours[c]
     return colour
 
-# The omputer's choice - hidden until guessed correctly or game ended
+# The computer's choice - hidden until guessed correctly or game ended
 def hidden() -> list:
         alpha:list = []
         for i in range(4):
