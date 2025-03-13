@@ -128,7 +128,7 @@ def game():
             player.addstr(3, 12,'                    Bye! 👋                         ', curses.color_pair(1))
             player.refresh()
             curses.napms(1500)
-            break
+            quit()
         if peg_count < 4:
             if chr(key) in 'rogbpy':
                 peg = get_colour(chr(key))
@@ -144,7 +144,7 @@ def game():
                 player.addstr(3, 12,'                    Bye! 👋                         ', curses.color_pair(1))
                 player.refresh()
                 curses.napms(1500)
-                break
+                quit()
             if key == ord('t'):
                 player.addstr(3, 12,'Your choice is                                         ', curses.color_pair(1))
                 peg_count = 0
@@ -183,7 +183,7 @@ def game():
                        player.addstr(3, 12,'                    Bye! 👋                         ', curses.color_pair(1))
                        player.refresh()
                        curses.napms(1500)
-                       break
+                       quit()
                 elif go_count == 8:
                     player.erase()
                     player = curses.newwin(5, 69, 15, 6)
@@ -201,7 +201,7 @@ def game():
                         player.addstr(3, 12,'                    Bye! 👋                         ', curses.color_pair(1))
                         player.refresh()
                         curses.napms(1500)
-                        break
+                        quit()
                 else:
                     player.addstr(3, 12,'Your choice is                                     ', curses.color_pair(1))
                     peg_count = 0
@@ -222,7 +222,7 @@ def main(stdscr):
     # Hide cursor
     curses.curs_set(0)
     # Title
-    stdscr.addstr(1, 31, "David's Mastermind", curses.color_pair(3))
+    stdscr.addstr(1, 32, "Mastermind", curses.color_pair(3))
     stdscr.refresh()
     # First show the game explanation window
     preview()
