@@ -10,7 +10,7 @@ def get_colour(c: str) -> str:
     colour: str = colours[c]
     return colour
 
-# The computer's choice - hidden until guessed correctly or game ended
+# The omputer's choice - hidden until guessed correctly or game ended
 def hidden() -> list:
         alpha:list = []
         for i in range(4):
@@ -222,7 +222,7 @@ def main(stdscr):
     # Hide cursor
     curses.curs_set(0)
     # Title
-    stdscr.addstr(1, 32, "Mastermind", curses.color_pair(3))
+    stdscr.addstr(1, 31, "David's Mastermind", curses.color_pair(3))
     stdscr.refresh()
     # First show the game explanation window
     preview()
@@ -230,5 +230,3 @@ def main(stdscr):
     game()
 
 curses.wrapper(main)
-
-
