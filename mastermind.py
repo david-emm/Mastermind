@@ -1,3 +1,20 @@
+'''
+This game was written as an exercise using the curses module included
+in Python 3.12 on a Linux machine. It is designed to run in Terminal
+mode (python3 mastermind.py). I understand that it will also run on
+an Apple Mac as the curses is included in their version of Python. 
+In MS Windows the curses module is NOT included in Python and needs
+to be. (python -m pip install windows-curses). This version uses
+these emojis, 🔴 🟠 🟢 🔵 🟣 🟡, to represent the coloured pegs
+as they negate the need to download images.
+
+Mastermind or Master Mind is a code-breaking game for two players
+invented in 1970 by Mordecai Meirowitz, an Israeli postmaster and
+telecommunications expert. It resembles an earlier pencil and paper
+game called Bulls and Cows that may date back a century.
+
+'''
+
 import curses
 import random
 
@@ -10,7 +27,7 @@ def get_colour(c: str) -> str:
     colour: str = colours[c]
     return colour
 
-# The omputer's choice - hidden until guessed correctly or game ended
+# The computer's choice - hidden until guessed correctly or game ended
 def hidden() -> list:
         alpha:list = []
         for i in range(4):
@@ -127,7 +144,7 @@ def game():
             player.addstr(1, 1,'                      Thank you for playing!                       ', curses.color_pair(1))
             player.addstr(3, 12,'                    Bye! 👋                         ', curses.color_pair(1))
             player.refresh()
-            curses.napms(1500)
+            curses.napms(1000)
             quit()
         if peg_count < 4:
             if chr(key) in 'rogbpy':
@@ -143,7 +160,7 @@ def game():
                 player.addstr(1, 1,'                      Thank you for playing!                       ', curses.color_pair(1))
                 player.addstr(3, 12,'                    Bye! 👋                         ', curses.color_pair(1))
                 player.refresh()
-                curses.napms(1500)
+                curses.napms(1000)
                 quit()
             if key == ord('t'):
                 player.addstr(3, 12,'Your choice is                                         ', curses.color_pair(1))
@@ -182,7 +199,7 @@ def game():
                        player.addstr(1, 1,'                      Thank you for playing!                       ', curses.color_pair(1))
                        player.addstr(3, 12,'                    Bye! 👋                         ', curses.color_pair(1))
                        player.refresh()
-                       curses.napms(1500)
+                       curses.napms(1000)
                        quit()
                 elif go_count == 8:
                     player.erase()
@@ -200,7 +217,7 @@ def game():
                         player.addstr(1, 1,'                      Thank you for playing!                       ', curses.color_pair(1))
                         player.addstr(3, 12,'                    Bye! 👋                         ', curses.color_pair(1))
                         player.refresh()
-                        curses.napms(1500)
+                        curses.napms(1000)
                         quit()
                 else:
                     player.addstr(3, 12,'Your choice is                                     ', curses.color_pair(1))
