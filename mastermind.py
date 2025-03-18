@@ -214,8 +214,8 @@ def game():
                     if key == ord ('a'):
                         game()
                     if key == ord('q'):
-                        player.addstr(1, 1,'                      Thank you for playing!                       ', curses.color_pair(1))
-                        player.addstr(3, 12,'                    Bye! 👋                         ', curses.color_pair(1))
+                        player.addstr(1, 23,'Thank you for playing!                       ', curses.color_pair(1))
+                        player.addstr(3, 33,'Bye! 👋                         ', curses.color_pair(1))
                         player.refresh()
                         curses.napms(1000)
                         quit()
