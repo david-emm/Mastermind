@@ -2,10 +2,10 @@
 This game was written as an exercise using the curses module included
 in Python 3.12 on a Linux machine. It is designed to run in Terminal
 mode (python3 mastermind.py). I understand that it will also run on
-an Apple Mac as the curses is included in their version of Python. 
-In MS Windows the curses module is NOT included in Python and needs
-to be. (python -m pip install windows-curses). This version uses
-these emojis, 🔴 🟠 🟢 🔵 🟣 🟡, to represent the coloured pegs
+an Apple Mac as the curses module is included in their version of
+Python. In MS Windows the curses module is NOT included in Python
+and needs to be. (python -m pip install windows-curses). This version
+uses these emojis, 🔴 🟠 🟢 🔵 🟣 🟡, to represent the coloured pegs
 as they negate the need to download images.
 
 Mastermind or Master Mind is a code-breaking game for two players
