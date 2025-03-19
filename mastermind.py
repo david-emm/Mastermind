@@ -1,12 +1,13 @@
 '''
 This game was written as an exercise using the curses module included
 in Python 3.12 on a Linux machine. It is designed to run in Terminal
-mode (python3 mastermind.py). I understand that it will also run on
+mode (python3 mastermind.py). I understand that it may run also on
 an Apple Mac as the curses module is included in their version of
-Python. In MS Windows the curses module is NOT included in Python
-and needs to be. (python -m pip install windows-curses). This version
-uses these emojis, 🔴 🟠 🟢 🔵 🟣 🟡, to represent the coloured pegs
-as they negate the need to download images.
+Python. In MS Windows the curses module is NOT included in Python and
+needs to be added. (python -m pip install windows-curses). This
+version uses these emojis, 🔴 🟠 🟢 🔵 🟣 🟡, to represent the
+coloured pegs as they negate the need to download images and are
+included in the fonts used in the Linux Terminal .
 
 Mastermind or Master Mind is a code-breaking game for two players
 invented in 1970 by Mordecai Meirowitz, an Israeli postmaster and
@@ -214,11 +215,11 @@ def game():
                     if key == ord ('a'):
                         game()
                     if key == ord('q'):
-                        player.addstr(1, 23,'Thank you for playing!                       ', curses.color_pair(1))
-                        player.addstr(3, 33,'Bye! 👋                         ', curses.color_pair(1))
-                        player.refresh()
-                        curses.napms(1000)
-                        quit()
+                       player.addstr(1, 1,'                      Thank you for playing!                       ', curses.color_pair(1))
+                       player.addstr(3, 12,'                    Bye! 👋                         ', curses.color_pair(1))
+                       player.refresh()
+                       curses.napms(1000)
+                       quit()
                 else:
                     player.addstr(3, 12,'Your choice is                                     ', curses.color_pair(1))
                     peg_count = 0
