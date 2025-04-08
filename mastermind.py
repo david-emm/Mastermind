@@ -7,7 +7,8 @@ Python. In MS Windows the curses module is NOT included in Python and
 needs to be added. (python -m pip install windows-curses). This
 version uses these emojis, 🔴 🟠 🟢 🔵 🟣 🟡, to represent the
 coloured pegs as they negate the need to download images and are
-included in the fonts used in the Linux Terminal .
+included in the fonts used in the Linux Terminal. I do not know
+if the Apple or MS Windows include similar fonts.
 
 Mastermind or Master Mind is a code-breaking game for two players
 invented in 1970 by Mordecai Meirowitz, an Israeli postmaster and
