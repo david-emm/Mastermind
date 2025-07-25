@@ -8,7 +8,7 @@ needs to be added. (python -m pip install windows-curses). This
 version uses these emojis, 🔴 🟠 🟢 🔵 🟣 🟡, to represent the
 coloured pegs as they negate the need to download images and are
 included in the fonts used in the Linux Terminal. I do not know
-if the Apple or MS Windows include similar fonts.
+if the Apple or MS Windows OS include similar fonts.
 
 Mastermind or Master Mind is a code-breaking game for two players
 invented in 1970 by Mordecai Meirowitz, an Israeli postmaster and
@@ -35,7 +35,6 @@ def hidden() -> list:
         for i in range(4):
             choice: str = random.choice('rgbyop')
             alpha.append(get_colour(choice))
-            # beta: str = '  '.join(alpha)
         return alpha
 
 # Converts a list (of emojis) into a string
@@ -74,7 +73,7 @@ def answer(hidden: list[str], guess: list[str]) -> list[str]:
                 reply.append(get_colour(choice))
     while len(reply) < 4:
         reply.append(get_colour('n'))  # brown pegs
-    random.shuffle(reply) # mix up order of answer prgs
+    random.shuffle(reply) # mix up order of answer pegs
     return reply
 
 # This window displays the game explanation window and then is deleted
@@ -112,7 +111,7 @@ def game():
     peg_pos:int = 28
     go_count:int = 0
     peg_count:int = 0
-    cover = '⚫  ⚫  ⚫  ⚫'
+    cover = '🟤  🟤  🟤  🟤'
 
     # Adds window titles and the covered hidden answer code
     header = curses.newwin(2, 40, 3, 20)
