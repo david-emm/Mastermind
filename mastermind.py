@@ -20,37 +20,42 @@ game called Bulls and Cows that may date back a century.
 import curses
 import random
 
-# The color dictionary
+# The emoji color dictionary
 colours: dict[str, str] = {'r': '🔴', 'o': '🟠', 'g': '🟢', 'b': '🔵', 'p':
                         '🟣', 'y': '🟡', 'k': '⚫', 'w': '⚪', 'n': '🟤'}
 
-# Returns an emoji from the player or the hidden code input
+
 def get_colour(c: str) -> str:
+    """ Returns an emoji from the player or the hidden code input."""
     colour: str = colours[c]
     return colour
 
-# The computer's choice - hidden until guessed correctly or game ended
-def hidden() -> list:
-        alpha:list = []
-        for i in range(4):
-            choice: str = random.choice('rgbyop')
-            alpha.append(get_colour(choice))
-        return alpha
 
-# Converts a list (of emojis) into a string
+def hidden() -> list[str]:
+    """ The computer's choice - hidden until guessed correctly or game ended. """
+    alpha:list[str] = []
+    while len(alpha) < 4:
+        choice: str = random.choice('rgbyop')
+        alpha.append(get_colour(choice))
+    return alpha
+
+
 def make_str(beta: list) -> str:
+    """  Converts a list (of emojis) into a string. """ 
     gamma: str = '  '.join(beta)
     return gamma
 
-# Converts a string into a list
-def make_list(beta: str) -> list:
-     gamma: list = beta.split()
-     return gamma
 
-# Computes computer's answer to the player's input
-def answer(hidden: list[str], guess: list[str]) -> list[str]:
+def make_list(beta: str) -> list:
+    """ Converts a string into a list. """
+    gamma: list = beta.split()
+    return gamma
+
+
+def answer(hide: list[str], guess: list[str]) -> list[str]:
+    """ Computes computer's answer to the player's input. """
     reply: list[str] = []
-    a: list[str] = hidden
+    a: list[str] = hide
     b: list[str] = guess
     marka: list[bool] = [False, False, False, False]
     markb: list[bool] = [False, False, False, False]
@@ -76,9 +81,9 @@ def answer(hidden: list[str], guess: list[str]) -> list[str]:
     random.shuffle(reply) # mix up order of answer pegs
     return reply
 
-# This window displays the game explanation window and then is deleted
+
 def preview():
-    # Add the preview window
+    """ This window displays the game explanation window and then is deleted. """
     prewin = curses.newwin(11, 70, 3, 5)
     prewin.box()
     # Print colored text
@@ -100,8 +105,9 @@ def preview():
             prewin.erase()
             prewin.refresh()
             return
-# Sets up the 4 game windows
+
 def game():
+    """ Sets up the 4 game windows. """
     # Game variables
     h_code: list = hidden()
     l_code: str = make_str(h_code)
@@ -126,19 +132,19 @@ def game():
     guess.refresh()
 
     # Adds the computer's 'Help' window
-    help = curses.newwin(10, 20, 5, 40)
-    help.box()
-    help.refresh()
+    helper = curses.newwin(10, 20, 5, 40)
+    helper.box()
+    helper.refresh()
 
-# Add the player's window and starts the game
+    # Add the player's window and starts the game
     player = curses.newwin(5, 69, 15, 6)
     player.box()
     player.addstr(1, 3,'Choose (r) : 🔴, (o) : 🟠, (g) : 🟢, (b) : 🔵, (p): 🟣, (y): 🟡', curses.color_pair(2))
     player.addstr(3, 12,'Your choice is ', curses.color_pair(1))
     player.refresh()
 
-# Input loop
-    # Generates a new hidden code and only plays for 8 gos
+    # Input loop
+    # Generates a new hidden code and only plays for 8 goes
     while go_count < 8:
         key = player.getch()
         if key == ord('q'):
@@ -180,8 +186,8 @@ def game():
                 guess.refresh()
                 guess_line +=1
                 helper = make_str(answer(h_code, make_list(myguess)))
-                help.addstr(help_line, 3, helper)
-                help.refresh()
+                helper.addstr(help_line, 3, helper)
+                helper.refresh()
                 help_line +=1
                 go_count +=1
                 if helper == '⚫  ⚫  ⚫  ⚫':
@@ -197,11 +203,11 @@ def game():
                     if key == ord('a'):
                         game()
                     if key == ord('q'):
-                       player.addstr(1, 1,'                      Thank you for playing!                       ', curses.color_pair(1))
-                       player.addstr(3, 12,'                    Bye! 👋                         ', curses.color_pair(1))
-                       player.refresh()
-                       curses.napms(1000)
-                       quit()
+                        player.addstr(1, 1,'                      Thank you for playing!                       ', curses.color_pair(1))
+                        player.addstr(3, 12,'                    Bye! 👋                         ', curses.color_pair(1))
+                        player.refresh()
+                        curses.napms(1000)
+                        quit()
                 elif go_count == 8:
                     player.erase()
                     player = curses.newwin(5, 69, 15, 6)
@@ -215,11 +221,11 @@ def game():
                     if key == ord ('a'):
                         game()
                     if key == ord('q'):
-                       player.addstr(1, 1,'                      Thank you for playing!                       ', curses.color_pair(1))
-                       player.addstr(3, 12,'                    Bye! 👋                         ', curses.color_pair(1))
-                       player.refresh()
-                       curses.napms(1000)
-                       quit()
+                        player.addstr(1, 1,'                      Thank you for playing!                       ', curses.color_pair(1))
+                        player.addstr(3, 12,'                    Bye! 👋                         ', curses.color_pair(1))
+                        player.refresh()
+                        curses.napms(1000)
+                        quit()
                 else:
                     player.addstr(3, 12,'Your choice is                                     ', curses.color_pair(1))
                     peg_count = 0
@@ -229,6 +235,7 @@ def game():
                     continue
 
 def main(stdscr):
+    """ Main loop. """
     # Initialize color
     curses.start_color()
     curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
