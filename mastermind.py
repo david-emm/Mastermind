@@ -132,9 +132,15 @@ def game():
     guess.refresh()
 
     # Adds the computer's 'Help' window
+<<<<<<< HEAD
     helps = curses.newwin(10, 20, 5, 40)
     helps.box()
     helps.refresh()
+=======
+    helper = curses.newwin(10, 20, 5, 40)
+    helper.box()
+    helper.refresh()
+>>>>>>> b5ce1432a19fa98f3d2851f375e49420507a321e
 
     # Add the player's window and starts the game
     player = curses.newwin(5, 69, 15, 6)
@@ -186,8 +192,13 @@ def game():
                 guess.refresh()
                 guess_line +=1
                 helper = make_str(answer(h_code, make_list(myguess)))
+<<<<<<< HEAD
                 helps.addstr(help_line, 3, helper)
                 helps.refresh()
+=======
+                helper.addstr(help_line, 3, helper)
+                helper.refresh()
+>>>>>>> b5ce1432a19fa98f3d2851f375e49420507a321e
                 help_line +=1
                 go_count +=1
                 if helper == '⚫  ⚫  ⚫  ⚫':
