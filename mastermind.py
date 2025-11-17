@@ -26,33 +26,32 @@ colours: dict[str, str] = {'r': '🔴', 'o': '🟠', 'g': '🟢', 'b': '🔵', '
                         '🟣', 'y': '🟡', 'k': '⚫', 'w': '⚪', 'n': '🟤'}
 
 def get_colour(c: str) -> str:
-# Returns an emoji from the player or the hidden code input
+    ''' Returns an emoji from the player or the hidden code input'''
     colour: str = colours[c]
     return colour
 
 def hidden() -> list:
-# The computer's choice - hidden until guessed correctly or game ended
-        alpha:list = []
-        for i in range(4):
-            choice: str = random.choice('rgbyop')
-            alpha.append(get_colour(choice))
-            # beta: str = '  '.join(alpha)
-        return alpha
+    ''' The computer's choice - hidden until guessed correctly or game ended'''
+    alpha:list = []
+    while len(alpha) < 4:
+        choice: str = random.choice('rgbyop')
+        alpha.append(get_colour(choice))
+    return alpha
 
 def make_str(beta: list) -> str:
-# Converts a list (of emojis) into a string
+    ''' Converts a list (of emojis) into a string'''
     gamma: str = '  '.join(beta)
     return gamma
 
 def make_list(beta: str) -> list:
-# Converts a string into a list
-     gamma: list = beta.split()
-     return gamma
+    ''' Converts a string into a list'''
+    gamma: list = beta.split()
+    return gamma
 
-def answer(hidden: list[str], guess: list[str]) -> list[str]:
-# Computes computer's answer to the player's input
+def answer(h_code, guess: list[str]) -> list[str]:
+    ''' Computes computer's answer to the player's input'''
     reply: list[str] = []
-    a: list[str] = hidden
+    a: list[str] = h_code
     b: list[str] = guess
     marka: list[bool] = [False, False, False, False]
     markb: list[bool] = [False, False, False, False]
@@ -79,7 +78,7 @@ def answer(hidden: list[str], guess: list[str]) -> list[str]:
     return reply
 
 def preview():
-# This window displays the preview window and then is deleted
+    ''' This window displays the preview window and then is deleted'''
     # Add the preview window
     prewin = curses.newwin(11, 70, 3, 5)
     prewin.box()
@@ -103,7 +102,7 @@ def preview():
             prewin.refresh()
             return
 def game():
-# Sets up the 4 game windows
+    ''' Sets up the 4 game windows'''
     # Game variables
     h_code: list = hidden()
     l_code: str = make_str(h_code)
@@ -128,20 +127,20 @@ def game():
     guess.refresh()
 
     # Adds the computer's 'Help' window
-    help = curses.newwin(10, 20, 5, 40)
-    help.box()
-    help.refresh()
+    my_help = curses.newwin(10, 20, 5, 40)
+    my_help.box()
+    my_help.refresh()
 
-# Add the player's window and starts the game
+    # Add the player's window and starts the game
     player = curses.newwin(5, 69, 15, 6)
     player.box()
     player.addstr(1, 3,'Choose (r) : 🔴, (o) : 🟠, (g) : 🟢, (b) : 🔵, (p): 🟣, (y): 🟡', curses.color_pair(2))
     player.addstr(3, 12,'Your choice is ', curses.color_pair(1))
     player.refresh()
 
-# Input loop
-    # Generates a new hidden code and only plays for 8 gos
+    # Input loop.
     while go_count < 8:
+        # Only plays for 8 goes
         key = player.getch()
         if key == ord('q'):
             player.addstr(1, 1,'                      Thank you for playing!                       ', curses.color_pair(1))
@@ -149,6 +148,7 @@ def game():
             player.refresh()
             curses.napms(1000)
             quit()
+        # Checks player choice.     
         if peg_count < 4:
             if chr(key) in 'rogbpy':
                 peg = get_colour(chr(key))
@@ -157,14 +157,17 @@ def game():
                 key = ''
                 player.refresh()
                 peg_count += 1
+        # Accept or reject choice        
         if peg_count == 4:
             player.addstr(3, 44, '(Enter) or rejec(t)', curses.color_pair(1))
+            # Quit game entirely
             if key == ord('q'):
                 player.addstr(1, 1,'                      Thank you for playing!                       ', curses.color_pair(1))
                 player.addstr(3, 12,'                    Bye! 👋                         ', curses.color_pair(1))
                 player.refresh()
                 curses.napms(1000)
                 quit()
+            # Reject this guess    
             if key == ord('t'):
                 player.addstr(3, 12,'Your choice is                                         ', curses.color_pair(1))
                 peg_count = 0
@@ -172,6 +175,7 @@ def game():
                 myguess = ''
                 player.refresh()
                 continue
+            #  Accept guess and analyse
             if key == 10: # Use 10 as the Enter key code (curses.KEY_ENTER) is unreliable
                 # Get a substring of length 22 starting from player line (3,28)
                 byte_data = player.instr(3, 28, 22)
@@ -182,8 +186,8 @@ def game():
                 guess.refresh()
                 guess_line +=1
                 helper = make_str(answer(h_code, make_list(myguess)))
-                help.addstr(help_line, 3, helper)
-                help.refresh()
+                my_help.addstr(help_line, 3, helper)
+                my_help.refresh()
                 help_line +=1
                 go_count +=1
                 if helper == '⚫  ⚫  ⚫  ⚫':
@@ -199,11 +203,11 @@ def game():
                     if key == ord('a'):
                         game()
                     if key == ord('q'):
-                       player.addstr(1, 1,'                      Thank you for playing!                       ', curses.color_pair(1))
-                       player.addstr(3, 12,'                    Bye! 👋                         ', curses.color_pair(1))
-                       player.refresh()
-                       curses.napms(1000)
-                       quit()
+                        player.addstr(1, 1,'                      Thank you for playing!                       ', curses.color_pair(1))
+                        player.addstr(3, 12,'                    Bye! 👋                         ', curses.color_pair(1))
+                        player.refresh()
+                        curses.napms(1000)
+                        quit()
                 elif go_count == 8:
                     player.erase()
                     player = curses.newwin(5, 69, 15, 6)
@@ -217,11 +221,11 @@ def game():
                     if key == ord ('a'):
                         game()
                     if key == ord('q'):
-                       player.addstr(1, 1,'                      Thank you for playing!                       ', curses.color_pair(1))
-                       player.addstr(3, 12,'                    Bye! 👋                         ', curses.color_pair(1))
-                       player.refresh()
-                       curses.napms(1000)
-                       quit()
+                        player.addstr(1, 1,'                      Thank you for playing!                       ', curses.color_pair(1))
+                        player.addstr(3, 12,'                    Bye! 👋                         ', curses.color_pair(1))
+                        player.refresh()
+                        curses.napms(1000)
+                        quit()
                 else:
                     player.addstr(3, 12,'Your choice is                                     ', curses.color_pair(1))
                     peg_count = 0
@@ -230,8 +234,8 @@ def game():
                     player.refresh()
                     continue
 
-# Main loop using curses module.    
 def main(stdscr):
+    ''' Main loop using curses module.'''
     # Initialize color
     curses.start_color()
     curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
