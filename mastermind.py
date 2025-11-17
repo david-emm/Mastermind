@@ -119,7 +119,7 @@ def game():
     header = curses.newwin(2, 40, 3, 20)
     header.addstr(0, 5, 'Hidden  ' + cover + '  code', curses.color_pair(1))
     header.addstr(1, 5, 'Your Guess', curses.color_pair(2))
-    header.addstr(1, 27, 'Help', curses.color_pair(2))
+    header.addstr(1, 26, 'My Help', curses.color_pair(2))
     header.refresh()
 
     # Adds the 'Your Guess' window
