@@ -25,13 +25,13 @@ import random
 colours: dict[str, str] = {'r': '🔴', 'o': '🟠', 'g': '🟢', 'b': '🔵', 'p':
                         '🟣', 'y': '🟡', 'k': '⚫', 'w': '⚪', 'n': '🟤'}
 
-# Returns an emoji from the player or the hidden code input
 def get_colour(c: str) -> str:
+# Returns an emoji from the player or the hidden code input
     colour: str = colours[c]
     return colour
 
-# The computer's choice - hidden until guessed correctly or game ended
 def hidden() -> list:
+# The computer's choice - hidden until guessed correctly or game ended
         alpha:list = []
         for i in range(4):
             choice: str = random.choice('rgbyop')
@@ -39,18 +39,18 @@ def hidden() -> list:
             # beta: str = '  '.join(alpha)
         return alpha
 
-# Converts a list (of emojis) into a string
 def make_str(beta: list) -> str:
+# Converts a list (of emojis) into a string
     gamma: str = '  '.join(beta)
     return gamma
 
-# Converts a string into a list
 def make_list(beta: str) -> list:
+# Converts a string into a list
      gamma: list = beta.split()
      return gamma
 
-# Computes computer's answer to the player's input
 def answer(hidden: list[str], guess: list[str]) -> list[str]:
+# Computes computer's answer to the player's input
     reply: list[str] = []
     a: list[str] = hidden
     b: list[str] = guess
@@ -78,8 +78,8 @@ def answer(hidden: list[str], guess: list[str]) -> list[str]:
     random.shuffle(reply) # mix up order of answer prgs
     return reply
 
-# This window displays the game explanation window and then is deleted
 def preview():
+# This window displays the preview window and then is deleted
     # Add the preview window
     prewin = curses.newwin(11, 70, 3, 5)
     prewin.box()
@@ -102,8 +102,8 @@ def preview():
             prewin.erase()
             prewin.refresh()
             return
-# Sets up the 4 game windows
 def game():
+# Sets up the 4 game windows
     # Game variables
     h_code: list = hidden()
     l_code: str = make_str(h_code)
@@ -230,6 +230,7 @@ def game():
                     player.refresh()
                     continue
 
+# Main loop using curses module.    
 def main(stdscr):
     # Initialize color
     curses.start_color()
@@ -249,4 +250,6 @@ def main(stdscr):
     # Now play the game until the player wins of runs out of goes
     game()
 
+
+#Start the game
 curses.wrapper(main)
